@@ -1,24 +1,26 @@
-const timer = document.getElementById("timer");
+const hoursInput = document.getElementById("hours");
+const minutesInput = document.getElementById("minutes");
+const secondsInput = document.getElementById("seconds");
 const startButton = document.getElementById("start");
 const pauseButton = document.getElementById("pause");
 const resetButton = document.getElementById("reset");
+const timerDisplay = document.getElementById("timer");
 const alarm = document.getElementById("alarm");
-const minutesInput = document.getElementById("minutes");
-const secondsInput = document.getElementById("seconds");
 
 let intervalId;
 let totalTime;
 let currentTime;
-let isPaused = false; // Variável para controlar o estado de pausa
 
 function updateTimerDisplay() {
-  const displayMinutes = Math.floor(currentTime / 60);
+  const displayHours = Math.floor(currentTime / 3600);
+  const displayMinutes = Math.floor((currentTime % 3600) / 60);
   const displaySeconds = currentTime % 60;
+  const formattedHours = displayHours < 10 ? "0" + displayHours : displayHours;
   const formattedMinutes =
     displayMinutes < 10 ? "0" + displayMinutes : displayMinutes;
   const formattedSeconds =
     displaySeconds < 10 ? "0" + displaySeconds : displaySeconds;
-  timer.innerText = formattedMinutes + ":" + formattedSeconds;
+  timerDisplay.innerText = `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
 }
 
 function startTimer() {
@@ -36,9 +38,10 @@ function startTimer() {
 
 startButton.addEventListener("click", function () {
   if (!intervalId) {
+    const hours = parseInt(hoursInput.value) || 0;
     const minutes = parseInt(minutesInput.value) || 0;
     const seconds = parseInt(secondsInput.value) || 0;
-    totalTime = minutes * 60 + seconds;
+    totalTime = hours * 3600 + minutes * 60 + seconds;
     if (totalTime > 0) {
       startTimer();
     }
@@ -49,7 +52,6 @@ pauseButton.addEventListener("click", function () {
   if (intervalId) {
     clearInterval(intervalId);
     intervalId = null;
-    isPaused = true; // Define o estado como pausado
     alarm.pause();
   }
 });
@@ -64,7 +66,7 @@ resetButton.addEventListener("click", function () {
   updateTimerDisplay();
   alarm.pause();
   alarm.currentTime = 0;
+  hoursInput.value = "0";
   minutesInput.value = "0";
   secondsInput.value = "0";
-  isPaused = false; // Define o estado como não pausado ao reiniciar
 });

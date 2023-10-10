@@ -2,16 +2,18 @@
   --white: #fff;
   --gray: #2e2e2e;
   --green: #3cb371;
+  --dark-green: #2b855394
 }
 
 * {
   padding: 0px;
   margin: 0px;
   box-sizing: border-box;
+  color: var(--gray);
+  font-family: Arial, sans-serif;
 }
 
 body {
-  font-family: Arial, sans-serif;
   text-align: center;
   background-color: var(--white);
   display: flex;
@@ -32,7 +34,7 @@ body {
 button {
   font-size: 18px;
   padding: 10px 20px;
-  background-color: #007bff;
+  background-color: var(--green);
   color: #fff;
   border: none;
   cursor: pointer;
@@ -41,11 +43,12 @@ button {
 }
 
 button:hover {
-  background-color: #0056b3;
+  background-color: var(--dark-green);
 }
 
 input {
-  width: 50px;
+  width: 70px;
   text-align: center;
   padding: 5px 10px;
+  outline: none;
 }
