@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Alarm</title>
+    <title>Timer</title>
     <link rel="stylesheet" href="resources/css/style.css" />
     <link
       rel="stylesheet"
@@ -20,25 +20,34 @@
   </head>
   <body>
     <div class="container">
-      <h1><i class="fas fa-clock"></i> Alarm</h1>
       <div class="timer-container">
-        <div class="mt-10">
-          <label for="hours">Horas:</label>
-          <input type="number" id="hours" min="0" placeholder="0" />
-          <label for="minutes">Minutos:</label>
-          <input type="number" id="minutes" min="0" placeholder="0" />
-          <label for="seconds">Segundos:</label>
-          <input type="number" id="seconds" min="0" placeholder="0" />
+        <h1><i class="fas fa-clock"></i> Timer</h1>
 
-          <div class="mt-10">
-            <button id="start">Start</button>
-            <button id="pause">Pause</button>
-            <button id="reset">Reset</button>
+        <div class="d-flex-inline mt-20">
+          <div class="d-flex-block">
+            <label for="hours">Hours</label>
+            <input type="number" id="hours" min="0" placeholder="0" />
+          </div>
+
+          <div class="d-flex-block">
+            <label for="minutes">Minutes</label>
+            <input type="number" id="minutes" min="0" placeholder="0" />
+          </div>
+
+          <div class="d-flex-block">
+            <label for="seconds">Seconds</label>
+            <input type="number" id="seconds" min="0" placeholder="0" />
           </div>
         </div>
-        <div id="timer" class="timer mt-10">00:00:00</div>
-        <audio id="alarm">
-          <source src="alarm.mp3" type="audio/mpeg" />
+
+        <div class="d-flex-inline mt-5">
+          <button id="start">Start</button>
+          <button id="pause">Pause</button>
+          <button id="reset">Reset</button>
+        </div>
+        <h1 id="timer" class="mt-20">00:00:00</div>
+        <audio id="audioTimer">
+          <source src="resources/audios/audioTimer.mp3" type="audio/mpeg" />
         </audio>
       </div>
     </div>

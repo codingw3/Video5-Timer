@@ -5,11 +5,12 @@ const startButton = document.getElementById("start");
 const pauseButton = document.getElementById("pause");
 const resetButton = document.getElementById("reset");
 const timerDisplay = document.getElementById("timer");
-const alarm = document.getElementById("alarm");
+const audioTimer = document.getElementById("audioTimer");
 
 let intervalId;
 let totalTime;
 let currentTime;
+let timerWasRunning = false;
 
 function updateTimerDisplay() {
   const displayHours = Math.floor(currentTime / 3600);
@@ -31,19 +32,34 @@ function startTimer() {
     updateTimerDisplay();
     if (currentTime === 0) {
       clearInterval(intervalId);
-      alarm.play();
+      audioTimer.play();
     }
   }, 1000);
 }
 
 startButton.addEventListener("click", function () {
-  if (!intervalId) {
-    const hours = parseInt(hoursInput.value) || 0;
-    const minutes = parseInt(minutesInput.value) || 0;
-    const seconds = parseInt(secondsInput.value) || 0;
-    totalTime = hours * 3600 + minutes * 60 + seconds;
-    if (totalTime > 0) {
+  if (intervalId) {
+    clearInterval(intervalId);
+  }
+
+  const hours = parseInt(hoursInput.value) || 0;
+  const minutes = parseInt(minutesInput.value) || 0;
+  const seconds = parseInt(secondsInput.value) || 0;
+
+  totalTime = hours * 3600 + minutes * 60 + seconds;
+
+  if (totalTime > 0) {
+    if (!timerWasRunning) {
       startTimer();
+    } else {
+      intervalId = setInterval(function () {
+        currentTime--;
+        updateTimerDisplay();
+        if (currentTime === 0) {
+          clearInterval(intervalId);
+          audioTimer.play();
+        }
+      }, 1000);
     }
   }
 });
@@ -52,7 +68,8 @@ pauseButton.addEventListener("click", function () {
   if (intervalId) {
     clearInterval(intervalId);
     intervalId = null;
-    alarm.pause();
+    timerWasRunning = true;
+    audioTimer.pause();
   }
 });
 
@@ -61,12 +78,13 @@ resetButton.addEventListener("click", function () {
     clearInterval(intervalId);
     intervalId = null;
   }
+  timerWasRunning = false;
   totalTime = 0;
   currentTime = 0;
   updateTimerDisplay();
-  alarm.pause();
-  alarm.currentTime = 0;
-  hoursInput.value = "0";
-  minutesInput.value = "0";
-  secondsInput.value = "0";
+  timer.currentTime = 0;
+  audioTimer.pause();
+  hoursInput.value = null;
+  minutesInput.value = null;
+  secondsInput.value = null;
 });
