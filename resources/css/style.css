@@ -2,7 +2,7 @@
   --white: #cecbca;
   --gray: #2e2e2e;
   --green: #3cb371;
-  --dark-green: #2b855394
+  --dark-green: #2b855394;
 }
 
 * {
@@ -29,22 +29,31 @@ body {
 }
 
 .mt-5 {
-    margin-top: 5px;
+  margin-top: 5px;
 }
 
 .mt-10 {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 
 .mt-20 {
-    margin-top: 20px;
+  margin-top: 20px;
+}
+
+button,
+input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 20px;
+  font-size: 16px;
+  border: none;
 }
 
 button {
   background-color: var(--green);
   cursor: pointer;
-  transition: background-color 0.3s;
   font-weight: bold;
+  transition: background-color 0.3s;
 }
 
 button:hover {
@@ -55,19 +64,7 @@ input {
   text-align: center;
   outline: none;
   color: var(--gray);
-}
-
-button, input {
-  width: 100%;
-  padding: 10px;
-  border-radius: 20px;
-  font-size: 16px;
-  border: none;
-}
-
-input {
-  border: 1px solid var(--gray);
-  outline: none;
+  border: 1px solid var(--green);
   background-color: var(--white);
 }
 

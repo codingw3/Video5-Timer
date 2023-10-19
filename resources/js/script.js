@@ -27,9 +27,11 @@ function updateTimerDisplay() {
 function startTimer() {
   currentTime = totalTime;
   updateTimerDisplay();
+
   intervalId = setInterval(function () {
     currentTime--;
     updateTimerDisplay();
+
     if (currentTime === 0) {
       clearInterval(intervalId);
       audioTimer.play();
@@ -55,6 +57,7 @@ startButton.addEventListener("click", function () {
       intervalId = setInterval(function () {
         currentTime--;
         updateTimerDisplay();
+
         if (currentTime === 0) {
           clearInterval(intervalId);
           audioTimer.play();
@@ -78,6 +81,7 @@ resetButton.addEventListener("click", function () {
     clearInterval(intervalId);
     intervalId = null;
   }
+  
   timerWasRunning = false;
   totalTime = 0;
   currentTime = 0;
